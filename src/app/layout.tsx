@@ -9,8 +9,8 @@ import { Footer } from '@/layouts/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Profile Manager App',
-  description: 'Copilot Profile Manager App',
+  title: 'Profile Manager',
+  description: 'Assembly Profile Manager App',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
