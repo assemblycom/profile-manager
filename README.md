@@ -1,1 +1,1 @@
-## Copilot profile manager
+## Assembly profile manager
