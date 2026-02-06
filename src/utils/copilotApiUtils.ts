@@ -1,5 +1,5 @@
-import { copilotApi } from 'copilot-node-sdk';
-import type { CopilotAPI as SDK } from 'copilot-node-sdk';
+import { assemblyApi } from '@assembly-js/node-sdk';
+import type { AssemblyAPI as SDK } from '@assembly-js/node-sdk';
 import {
   ClientResponse,
   ClientResponseSchema,
@@ -26,7 +26,7 @@ export class CopilotAPI {
   copilot: SDK;
 
   constructor(apiToken: string) {
-    this.copilot = copilotApi({
+    this.copilot = assemblyApi({
       apiKey: copilotAPIKey,
       token: apiToken,
     });
@@ -70,6 +70,6 @@ export class CopilotAPI {
   }
 
   async getCustomFields(): Promise<CustomFieldResponse> {
-    return CustomFieldResponseSchema.parse(await this.copilot.listCustomFields());
+    return CustomFieldResponseSchema.parse(await this.copilot.listCustomFields({}));
   }
 }
