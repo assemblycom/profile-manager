@@ -1,7 +1,7 @@
 import { Autocomplete, Chip } from '@mui/material';
 import { StyledTextInput } from '../styled/StyledTextInput';
 import { ClearOutlined, FiberManualRecord } from '@mui/icons-material';
-import { updateColor } from '@/utils/updateColor';
+import { getChipColors } from '@/utils/updateColor';
 
 interface IMultiSelect<T extends object> {
   data: T[];
@@ -27,31 +27,34 @@ export const MultiSelect = <T extends object>({ data, nameField, value, getSelec
       disabled={disabled}
       renderInput={(params) => <StyledTextInput {...params} />}
       renderTags={(value: T[], getTagProps) =>
-        value.map((option: any, index: number) => (
-          <Chip
-            variant="outlined"
-            label={nameField(option)}
-            {...getTagProps({ index })}
-            key={index}
-            deleteIcon={<ClearOutlined />}
-            avatar={<FiberManualRecord fontSize="small" />}
-            sx={{
-              '&.MuiChip-root': {
-                borderColor: updateColor(option.color, 0.3),
-                border: '2px solid',
-                background: updateColor(option.color, 0.1),
-                color: option.color,
-                fontWeight: 500,
-              },
-              '& .MuiChip-deleteIcon': {
-                color: option.color,
-              },
-              '& .MuiChip-avatar': {
-                color: option.color,
-              },
-            }}
-          />
-        ))
+        value.map((option: any, index: number) => {
+          const chipColors = getChipColors(option.color);
+          return (
+            <Chip
+              variant="outlined"
+              label={nameField(option)}
+              {...getTagProps({ index })}
+              key={index}
+              deleteIcon={<ClearOutlined />}
+              avatar={<FiberManualRecord fontSize="small" />}
+              sx={{
+                '&.MuiChip-root': {
+                  borderColor: chipColors.border,
+                  border: '2px solid',
+                  background: chipColors.background,
+                  color: chipColors.text,
+                  fontWeight: 500,
+                },
+                '& .MuiChip-deleteIcon': {
+                  color: chipColors.icon,
+                },
+                '& .MuiChip-avatar': {
+                  color: chipColors.icon,
+                },
+              }}
+            />
+          );
+        })
       }
       sx={{
         '& .MuiOutlinedInput-root': {
