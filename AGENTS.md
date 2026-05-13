@@ -50,7 +50,7 @@ Three models in `prisma/schema.prisma`:
 - `ClientProfileUpdates` — audit log of profile changes (stores full custom fields + changed fields as JSONB)
 - `Setting` — per-portal JSON configuration
 
-Uses `relationMode = "prisma"` for serverless compatibility. Connection string uses `POSTGRES_PRISMA_URL_HIGHER_CONNECTION_LIMIT`.
+Uses `relationMode = "prisma"` for serverless compatibility. Connection string uses `POSTGRES_PRISMA_URL_WITH_POOL`.
 
 ### Mutable/Immutable State Pattern
 
