@@ -26,7 +26,8 @@ async function getCustomFieldAccess({
   });
 
   if (!res.ok) {
-    throw new Error('Something went wrong in getCustomFieldAccess');
+    const body = await res.text().catch(() => '');
+    throw new Error(`getCustomFieldAccess failed: ${res.status} ${body.slice(0, 200)}`);
   }
 
   const { data } = await res.json();
