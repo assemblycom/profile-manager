@@ -7,8 +7,10 @@ generator client {
 
 datasource db {
   provider     = "postgresql"
-  // Vercel won't let us change the POSTGRES_* config so update it with a connection_limit key using a custom env var like
-  // POSTGRES_PRISMA_URL_HIGHER_CONNECTION_LIMIT="$POSTGRES_PRISMA_URL&connection_limit=20"
+  // Vercel won't let us edit POSTGRES_* directly, so we wrap POSTGRES_PRISMA_URL with extra params via a custom env var.
+  // For Vercel serverless, keep connection_limit small — each lambda gets its own client-side pool, and large values
+  // multiplied by concurrent lambdas saturate pgBouncer (see https://pris.ly/d/connection-pool). Recommended value:
+  // POSTGRES_PRISMA_URL_HIGHER_CONNECTION_LIMIT="$POSTGRES_PRISMA_URL&connection_limit=5&pool_timeout=20"
   url          = env("POSTGRES_PRISMA_URL_HIGHER_CONNECTION_LIMIT")
   directUrl    = env("POSTGRES_URL_NON_POOLING")
   // Emulates relationships in Prisma client itself. Better for serverless databases like neon or planetscale

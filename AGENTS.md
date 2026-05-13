@@ -18,6 +18,7 @@ yarn prettier:fix     # Prettier auto-format
 ```
 
 After changing `prisma/schema.prisma`:
+
 ```bash
 npx prisma generate   # Regenerate Prisma client (also runs on postinstall)
 npx prisma db push    # Push schema changes to database
@@ -44,6 +45,7 @@ No test suite is configured.
 ### Database (Prisma + PostgreSQL)
 
 Three models in `prisma/schema.prisma`:
+
 - `CustomFieldAccess` — per-portal field-level VIEW/EDIT permissions
 - `ClientProfileUpdates` — audit log of profile changes (stores full custom fields + changed fields as JSONB)
 - `Setting` — per-portal JSON configuration
@@ -66,6 +68,7 @@ Settings and custom field access are stored as two copies in context: a read-onl
 ## Environment Setup
 
 Copy `.env.example` to `.env.local`. Required variables:
+
 - `COPILOT_API_KEY` — from the Assembly/Copilot dashboard
 - `COPILOT_ENV` — `local` for test tokens, `production` for real tokens
 - `POSTGRES_PRISMA_URL` and related DB vars — PostgreSQL connection strings
