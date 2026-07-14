@@ -114,6 +114,7 @@ export const CustomFieldSchema = z.object({
       }),
     )
     .optional(),
+  entityType: z.string(),
 });
 export type CustomField = z.infer<typeof CustomFieldSchema>;
 export const CustomFieldResponseSchema = z.object({
