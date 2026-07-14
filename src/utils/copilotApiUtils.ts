@@ -70,6 +70,7 @@ export class CopilotAPI {
   }
 
   async getCustomFields(): Promise<CustomFieldResponse> {
-    return CustomFieldResponseSchema.parse(await this.copilot.listCustomFields());
+    const response = CustomFieldResponseSchema.parse(await this.copilot.listCustomFields());
+    return { ...response, data: response.data?.filter((field) => field.entityType === 'client') ?? [] };
   }
 }
